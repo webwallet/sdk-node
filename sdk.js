@@ -54,26 +54,81 @@ function generateTransactionRequest(signer, transaction, options) {
     cur: transaction.currency,
     sub: signer.address,
     aud: transaction.destination,
-    nce: Math.floor(Math.random() * 1000000000)
+    nce: Math.floor(Math.random() * 1000000000) + ''
   };
 
   return createTransactionRequestStatement(signer, iou, options);
 }
 
-function registerWalletAddress() {
+function registerWalletAddress(url, body, options) {
+  options = options || {};
+  url += '/address';
 
+  return new P(function (resolve, reject) {
+    request({
+      url: url,
+      method: options.method || 'POST',
+      body: body,
+      json: true,
+      headers: options.headers
+    }, function (err, res, body) {
+      if (err) return reject(err);
+      return resolve(body);
+    });
+  });
 }
 
-function registerCurrencyIssuer() {
-  
+function registerCurrencyIssuer(url, body, options) {
+  options = options || {};
+  url += '/currency';
+
+  return new P(function (resolve, reject) {
+    request({
+      url: url,
+      method: options.method || 'POST',
+      body: body,
+      json: true,
+      headers: options.headers
+    }, function (err, res, body) {
+      if (err) return reject(err);
+      return resolve(body);
+    });
+  });
 }
 
-function registerTransactionRequest() {
+function registerTransactionRequest(url, body, options) {
+  options = options || {};
+  url += '/transaction';
 
+  return new P(function (resolve, reject) {
+    request({
+      url: url,
+      method: options.method || 'POST',
+      body: body,
+      json: true,
+      headers: options.headers
+    }, function (err, res, body) {
+      if (err) return reject(err);
+      return resolve(body);
+    });
+  });
 }
 
-function checkAddressBalance() {
+function checkAddressBalance(url, address, options) {
+  options = options || {};
+  url += '/address/.../balance'.replace('...', address);
+  console.log(url)
 
+  return new P(function (resolve, reject) {
+    request({
+      url: url,
+      method: 'GET',
+      headers: options.headers
+    }, function (err, res, body) {
+      if (err) return reject(err);
+      return resolve(body);
+    });
+  });
 }
 
 /*--------------------------------------------------------------------------------*/
@@ -164,7 +219,7 @@ function createTransactionRequestStatement(signer, iou, options) {
       {
         header: {
           alg: signer.keys.scheme,
-          kid: '0'
+          kid: signer.address
         },
         signature: ''
       }
