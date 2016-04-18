@@ -1,7 +1,7 @@
 {
   "name": "webwallet",
   "version": "0.1.0",
-  "description": "WebWallet SDK for Node"
+  "description": "WebWallet SDK for Node",
   "main": "sdk.js",
   "repository": {
     "type": "git",
