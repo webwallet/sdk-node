@@ -1,5 +1,23 @@
 {
+  "name": "webwallet",
+  "version": "0.1.0",
+  "description": "WebWallet SDK for Node"
   "main": "sdk.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:webwallet/sdk-node.git"
+  },
+  "keywords": [
+    "wallet",
+    "currency",
+    "transactions"
+  ],
+  "author": {
+    "name": "Playbanq",
+    "email": "developers@playbanq.com"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/webwallet/sdk-node",
   "dependencies": {
     "bluebird": "^3.3.4",
     "bs58check": "^1.0.8",
